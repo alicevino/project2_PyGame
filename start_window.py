@@ -61,7 +61,7 @@ with open('cvx.csv', 'r') as f:
     reader = csv.reader(f)
     for row in reader:
         data_cvx.extend(map(int, row))
-with open('abbv.csv', 'r') as f:
+with open('data/abbv.csv', 'r') as f:
     reader = csv.reader(f)
     for row in reader:
         data_abbv.extend(map(int, row))
