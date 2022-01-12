@@ -53,11 +53,11 @@ with open('sony.csv', 'w') as f:
     writer.writerow(data_sony)
 '''
 
-with open('tsm.csv', 'r') as f:
+with open('data/tsm.csv', 'r') as f:
     reader = csv.reader(f)
     for row in reader:
         data_tsm.extend(map(int, row))
-with open('cvx.csv', 'r') as f:
+with open('data/cvx.csv', 'r') as f:
     reader = csv.reader(f)
     for row in reader:
         data_cvx.extend(map(int, row))
@@ -65,7 +65,7 @@ with open('data/abbv.csv', 'r') as f:
     reader = csv.reader(f)
     for row in reader:
         data_abbv.extend(map(int, row))
-with open('sony.csv', 'r') as f:
+with open('data/sony.csv', 'r') as f:
     reader = csv.reader(f)
     for row in reader:
         data_sony.extend(map(int, row))
@@ -112,7 +112,7 @@ pygame.display.set_caption('Игра БИРЖА')
 
 
 def load_image(name, colorkey=None):
-    fullname = os.path.join('data', name)
+    fullname = os.path.join('data\pictures', name)
     # если файл не существует, то выходим
     if not os.path.isfile(fullname):
         print(f"Файл с изображением '{fullname}' не найден")
