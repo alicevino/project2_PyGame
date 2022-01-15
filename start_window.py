@@ -4,7 +4,6 @@ import os
 import random
 import csv
 
-
 # from random import randrange
 
 WINDOW = 'start'  # start, level, game, finish
@@ -604,7 +603,8 @@ while running:
         # change_stock_num()
         if event.type == pygame.MOUSEBUTTONUP and event.button == pygame.BUTTON_LEFT:
             if (width * 0.6 - 5 <= event.pos[0] <= width * 0.65 - 9 + 25 and
-                    height * 0.045 + height * 0.05 - 5 <= event.pos[1] < height * 0.045 + height * 0.05 * len(PL) - 5 + 25):
+                    height * 0.045 + height * 0.05 - 5 <= event.pos[1] < height * 0.045 + height * 0.05 * len(
+                        PL) - 5 + 25):
                 # print(len(PL))
                 if WINDOW == 'game':
                     window.shange_stock_num(event.pos)
