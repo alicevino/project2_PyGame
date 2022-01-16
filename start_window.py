@@ -19,8 +19,8 @@ class StartWindow:
             'SONY': [True, 0, 0],
         }
 
-        utils.all_sprites.update()
-        utils.all_sprites.draw(params.screen)
+        utils.all_sprites_coins.update()
+        utils.all_sprites_coins.draw(params.screen)
 
         utils.set_input_text("ИГРА БИРЖА", (params.width // 2, params.height // 2), 100)
 

@@ -6,6 +6,8 @@ import pygame
 
 import params
 
+GRAVITY = 0.25
+
 
 def load_image(name, colorkey=None):
     fullname = os.path.join('data\pictures', name)
@@ -50,7 +52,7 @@ def draw_button(pos, size, w=4):
 
 class Coin(pygame.sprite.Sprite):
     image = load_image('mario coin_2.png')
-    image = pygame.transform.scale(image, (40, 40))
+    image = pygame.transform.scale(image, (50, 50))
 
     def __init__(self, *groups):
         super().__init__(*groups)
@@ -58,18 +60,57 @@ class Coin(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = random.randrange(params.width - self.rect.w)
         self.rect.y = random.randrange(params.height - self.rect.h)
-        self.v = random.randrange(10, 20)
+        self.v = random.randrange(2, 5)
 
-    def update(self, *args):
-        self.fall()
+    def update(self, event=None):
+        if event and self.rect.collidepoint(event.pos):
+            self.bear(event.pos)
+        else:
+            self.fall()
 
     def fall(self):
         self.rect.y += self.v
-        if self.rect.y > params.height:
-            self.rect.x = random.randrange(params.width - self.rect.w)
-            self.rect.y = - self.rect.h
+        if self.rect.y > params.height - 35:
+            self.bear((self.rect.x, self.rect.y - 15))
 
+    def bear(self, pos):
+        create_particles(pos)
+        self.rect.x = random.randrange(params.width - self.rect.w)
+        self.rect.y = - self.rect.h
+
+
+all_sprites_coins = pygame.sprite.Group()
+for _ in range(25):
+    Coin(all_sprites_coins)
 
 all_sprites = pygame.sprite.Group()
-for _ in range(25):
-    Coin(all_sprites)
+
+
+class Particle(pygame.sprite.Sprite):
+    fire = [load_image("star.png", -1)]
+    for scale in (5, 10, 20):
+        fire.append(pygame.transform.scale(fire[0], (scale, scale)))
+
+    def __init__(self, pos, dx, dy):
+        super().__init__(all_sprites)
+        self.image = random.choice(self.fire)
+        self.rect = self.image.get_rect()
+
+        self.velocity = [dx, dy]
+        self.rect.centerx, self.rect.centery = pos
+
+        self.gravity = GRAVITY
+
+    def update(self):
+        self.velocity[1] += self.gravity
+        self.rect.x += self.velocity[0]
+        self.rect.y += self.velocity[1]
+        if not self.rect.colliderect(params.screen.get_rect()):
+            self.kill()
+
+
+def create_particles(position):
+    particle_count = 20
+    numbers = range(-5, 6)
+    for _ in range(particle_count):
+        Particle(position, random.choice(numbers), random.choice(numbers))

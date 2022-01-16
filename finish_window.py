@@ -4,8 +4,11 @@ import utils
 
 class FinishWindow:
     def __init__(self):
-        utils.all_sprites.update()
+        utils.all_sprites_coins.draw(params.screen)
+        utils.all_sprites_coins.update()
+
         utils.all_sprites.draw(params.screen)
+        utils.all_sprites.update()
 
         utils.draw_button((params.width * 0.3, params.height * 0.7), (params.width * 0.4, params.height * 0.1))
         utils.set_input_text('ИГРАТЬ СНОВА', (params.width * 0.5, params.height * 0.75), 50)

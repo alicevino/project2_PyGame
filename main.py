@@ -8,6 +8,8 @@ size = params.width, params.height = 900, 650
 params.screen = pygame.display.set_mode(size)
 pygame.display.set_caption('Игра БИРЖА')
 
+import utils
+
 import start_window
 import level_window
 import game_window
@@ -96,6 +98,10 @@ while running:
                     HINT = True
                 else:
                     HINT = False
+        # finish_window stars
+        if event.type == pygame.MOUSEBUTTONUP:
+            if params.WINDOW == 'finish':
+                utils.all_sprites_coins.update(event)
 
     if params.WINDOW == 'start':
         window = start_window.StartWindow()
