@@ -43,11 +43,11 @@ while running:
                     params.THEME, params.COLOR = params.COLOR, params.THEME
 
         # choose_level()
-        # if event.type == pygame.MOUSEBUTTONUP and event.button == pygame.BUTTON_LEFT:
-        #     if (width * 0.23 * 1 - width * 0.05 <= event.pos[0] <= width * 0.23 * 4 - width * 0.05 + 40
-        #             and height * 0.75 <= event.pos[1] < height * 0.75 + 40):
-        #         if WINDOW == 'level':
-        #             window.choose_level(event.pos)
+        if event.type == pygame.MOUSEBUTTONUP and event.button == pygame.BUTTON_LEFT:
+            if (params.width * 0.23 * 1 - params.width * 0.05 <= event.pos[0] <= params.width * 0.23 * 4 - params.width * 0.05 + 40
+                    and params.height * 0.75 <= event.pos[1] < params.height * 0.75 + 40):
+                if params.WINDOW == 'level':
+                    window.choose_level(event.pos)
 
         # переход from start to level
         if event.type == pygame.MOUSEBUTTONUP and event.button == pygame.BUTTON_LEFT:

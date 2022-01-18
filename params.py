@@ -18,10 +18,8 @@ START_TIME = 0
 ALERT = False
 HINT = False
 
-# data_n = []  # random
-
 # Параметры игрока
-INITIAL_CASH = 2_000
+INITIAL_CASH = 1_000
 CUR_CASH = INITIAL_CASH
 
 PL = []
@@ -30,7 +28,6 @@ LEVEL = {
     'TSM': [data_reader.data_tsm, True, 'green', 0],
     'ABBV': [data_reader.data_abbv, True, 'blue', 0],
     'SONY': [data_reader.data_sony, True, 'orange', 0],
-    # data_n: False
 }
 
 # Параметры робота
@@ -39,7 +36,6 @@ ROBOT = {
     'TSM': [True, 0, 0, 0],
     'ABBV': [True, 0, 0, 0],
     'SONY': [True, 0, 0, 0],
-    # data_n: False
 }
 ROBOT_CUR_CASH = INITIAL_CASH
 ROBOT_USE_STOP = True
