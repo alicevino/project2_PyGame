@@ -1,10 +1,17 @@
+"""
+Начальное окно игры. Появляется в самом начале,
+дает возможность выбрать цветовую тему и перейти к игре
+"""
+
 import data_reader
 import params
 import utils
 
 
+# Начальное окно
 class StartWindow:
     def __init__(self):
+        # инициализация игровых компаний
         params.LEVEL = {
             'CVX': [data_reader.data_cvx, True, 'red', 0],
             'TSM': [data_reader.data_tsm, True, 'green', 0],
@@ -13,20 +20,24 @@ class StartWindow:
         }
         params.PL = ['CVX', 'TSM', 'ABBV', 'SONY']
         params.ROBOT = {
-            'CVX': [True, 0, 0],
-            'TSM': [True, 0, 0],
-            'ABBV': [True, 0, 0],
-            'SONY': [True, 0, 0],
+            'CVX': [True, 0, 0, 0],
+            'TSM': [True, 0, 0, 0],
+            'ABBV': [True, 0, 0, 0],
+            'SONY': [True, 0, 0, 0],
         }
 
+        # инициализация анимации
         utils.all_sprites_coins.update()
         utils.all_sprites_coins.draw(params.screen)
 
+        # название игры
         utils.set_input_text("ИГРА БИРЖА", (params.width // 2, params.height // 2), 100)
 
+        # кнопка начала игры
         utils.draw_button((params.width * 0.3, params.height * 0.7), (params.width * 0.4, params.height * 0.1))
         utils.set_input_text('ИГРАТЬ', (params.width * 0.5, params.height * 0.75), 50)
 
+        # изменение цветовой темы
         utils.draw_button(
             (params.width * 0.02, params.height * 0.03),
             (params.width * 0.25, params.height * 0.07),
@@ -35,6 +46,7 @@ class StartWindow:
                        (params.width * 0.145, params.height * 0.065),
                        30)
 
+        # выход из игры
         utils.draw_button(
             (params.width * 0.78, params.height * 0.03),
             (params.width * 0.2, params.height * 0.07),

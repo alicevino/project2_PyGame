@@ -1,3 +1,8 @@
+"""
+Основные параметры игры для данных игрока, робота и
+графических элементов.
+"""
+
 import data_reader
 
 WINDOW = 'start'  # start, level, game, finish
@@ -15,7 +20,8 @@ HINT = False
 
 # data_n = []  # random
 
-INITIAL_CASH = 1_000
+# Параметры игрока
+INITIAL_CASH = 2_000
 CUR_CASH = INITIAL_CASH
 
 PL = []
@@ -27,14 +33,18 @@ LEVEL = {
     # data_n: False
 }
 
+# Параметры робота
 ROBOT = {
-    'CVX': [True, 0, 0],
-    'TSM': [True, 0, 0],
-    'ABBV': [True, 0, 0],
-    'SONY': [True, 0, 0],
+    'CVX': [True, 0, 0, 0],
+    'TSM': [True, 0, 0, 0],
+    'ABBV': [True, 0, 0, 0],
+    'SONY': [True, 0, 0, 0],
     # data_n: False
 }
 ROBOT_CUR_CASH = INITIAL_CASH
+ROBOT_USE_STOP = True
+ROBOT_STOP_LOSS = 0.1
+ROBOT_TAKE_PROFIT = 0.1
 
 CUR_PRICE = 0
 profit = 0

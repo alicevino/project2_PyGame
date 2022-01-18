@@ -1,3 +1,9 @@
+"""
+Вспомогательные функции для графических элементов.
+Классы для создания анимационных элементов - падающих монеток и
+фонтанчика брызг.
+"""
+
 import os
 import random
 import sys
@@ -8,7 +14,7 @@ import params
 
 GRAVITY = 0.25
 
-
+# загрузка изображения для анимации
 def load_image(name, colorkey=None):
     fullname = os.path.join('data\pictures', name)
     # если файл не существует, то выходим
@@ -16,6 +22,7 @@ def load_image(name, colorkey=None):
         print(f"Файл с изображением '{fullname}' не найден")
         sys.exit()
     image = pygame.image.load(fullname)
+    # прозрачный фон
     if colorkey is not None:
         image = image.convert()
         if colorkey == -1:
@@ -26,12 +33,14 @@ def load_image(name, colorkey=None):
     return image
 
 
+# установка параметров текста
 def set_text(text, color, xx, yy, size, pos):
     x, y = pos
     text = pygame.font.Font(None, size).render(text, True, color)
     params.screen.blit(text, (x - text.get_width() // 2 + xx, y - text.get_height() // 2 + yy))
 
 
+# установка параметров текста для вывода информации
 def set_input_text(text, pos, size):
     for x in -2, 0, 2:
         for y in -2, 0, 2:
@@ -39,6 +48,7 @@ def set_input_text(text, pos, size):
     set_text(text, params.COLOR, 0, 0, size, pos)
 
 
+# отрисовка кнопок
 def draw_button(pos, size, w=4):
     pygame.draw.rect(params.screen, params.THEME,
                      (pos[0] - (w + 2), pos[1] - (w + 2),
@@ -50,6 +60,7 @@ def draw_button(pos, size, w=4):
                      w)
 
 
+# Класс для анимации - отрисовка падающих монеток
 class Coin(pygame.sprite.Sprite):
     image = load_image('mario coin_2.png')
     image = pygame.transform.scale(image, (50, 50))
@@ -68,17 +79,20 @@ class Coin(pygame.sprite.Sprite):
         else:
             self.fall()
 
+    # падение монетки
     def fall(self):
         self.rect.y += self.v
         if self.rect.y > params.height - 35:
             self.bear((self.rect.x, self.rect.y - 15))
 
+    # рождение фонтанчика
     def bear(self, pos):
         create_particles(pos)
         self.rect.x = random.randrange(params.width - self.rect.w)
         self.rect.y = - self.rect.h
 
 
+# Список спрайтов монеток
 all_sprites_coins = pygame.sprite.Group()
 for _ in range(25):
     Coin(all_sprites_coins)
@@ -86,6 +100,9 @@ for _ in range(25):
 all_sprites = pygame.sprite.Group()
 
 
+# Класс для анимации - рассыпающийся фонтанчик звездочек.
+# Возникает при достижении нижней границы окна и при нажатии
+# мыши на монетку
 class Particle(pygame.sprite.Sprite):
     fire = [load_image("star.png", -1)]
     for scale in (5, 10, 20):

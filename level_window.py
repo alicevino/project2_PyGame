@@ -1,15 +1,23 @@
+"""
+Окно с инфрмацией о правилах игры. Обеспечивает выбор
+параметров игры - списка компаний.
+"""
+
 import pygame
 
 import params
 import utils
 
 
+# Окно для выбора параметров игры
 class LevelWindow:
     def __init__(self):
+        # инициализация базовых параметров игрока
         params.CUR_CASH = params.INITIAL_CASH
         params.ROBOT_CUR_CASH = params.INITIAL_CASH
         params.CUR_PRICE = 0
 
+        # кнопка возврата на предыдущее окно
         utils.draw_button(
             (params.width * 0.02, params.height * 0.03),
             (params.width * 0.1, params.height * 0.07),
@@ -18,6 +26,7 @@ class LevelWindow:
                              (params.width * 0.07, params.height * 0.065),
                              30)
 
+        # начало игры
         utils.draw_button(
             (params.width * 0.82, params.height * 0.875),
             (params.width * 0.1558, params.height * 0.1),
@@ -30,6 +39,7 @@ class LevelWindow:
         self.set_rules()
         self.show_warning()
 
+    # правила игры
     def set_rules(self):
         utils.set_input_text('Перед Вами финансовая игра БИРЖА.', (params.width * 0.5, params.height * 0.2), 50)
 
@@ -42,6 +52,7 @@ class LevelWindow:
         utils.set_input_text('Вам удалось получить прибыль, Вы выиграли,', (params.width * 0.5, params.height * 0.6), 30)
         utils.set_input_text('если убыток – проиграли.', (params.width * 0.5, params.height * 0.65), 30)
 
+    # выбор компаний для игры
     def play(self):
         params.PL = []
         for c in params.LEVEL:
@@ -56,6 +67,7 @@ class LevelWindow:
         else:
             params.ALERT = True
 
+    # предупреждение, что ни одна компания не выбрана
     def show_warning(self):
         if params.ALERT:
             utils.draw_button(
@@ -66,6 +78,7 @@ class LevelWindow:
             utils.set_input_text('нельзя начать игру,', (params.width * 0.5, params.height * 0.52), 20)
             utils.set_input_text('пока не выбраны компании', (params.width * 0.5, params.height * 0.54), 20)
 
+    # выбор компаний для игры
     def choose_level(self, pos):
         for i in range(1, len(params.PL) + 1):
 
@@ -73,6 +86,7 @@ class LevelWindow:
                     and params.height * 0.75 <= pos[1] <= params.height * 0.75 + 40):
                 params.LEVEL[params.PL[i - 1]][1] = not params.LEVEL[params.PL[i - 1]][1]
 
+    # отрисовка выбранных компаний
     def draw_levels(self):
         i = 0
         for c in params.LEVEL:

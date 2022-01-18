@@ -1,3 +1,14 @@
+"""
+Получение данных с котировками выбранных компаний
+за определенный период времени.
+
+На данный момент реализовано получение данных фиксированных компаний
+за фиксированный отрезок времени.
+
+Данные можно получить либо с Yahoo Finance, либо прочитать из
+csv-файлов уже скаченные данные, что достаточно для игры.
+"""
+
 import csv
 
 data_tsm = []
@@ -8,6 +19,7 @@ data_sony = []
 """
 import yfinance as yf
 
+# Получение котировок с Yahoo Finance
 for c in yf.download('TSM', '2021-06-10', '2021-12-10')['Adj Close']:
     data_tsm.append(int(c))
 
@@ -34,6 +46,7 @@ with open('sony.csv', 'w') as f:
     writer.writerow(data_sony)
 """
 
+# Чтение котировок из файлов
 with open('data/tsm.csv', 'r') as f:
     reader = csv.reader(f)
     for row in reader:
