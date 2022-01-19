@@ -11,7 +11,7 @@
 2.  Расширить набор параметров, задаваемых пользователем
     - начальная сумма на счете
     - время игры
-    - изменение скорости игры (!)
+    - изменение скорости игры
     - подключать робота или нет
     - параметры робота
 
@@ -21,7 +21,8 @@
 
 Coдание дистрибутива
 
-pyinstaller --add-data 'data/mario coin_2.png;.' --add-data 'tsm.csv;.'
---add-data 'cvx.csv;.' --add-data 'abbv.csv;.' --add-data 'sony.csv;.' --clean start_window.py
-
---onefile main.py
+pyinstaller --add-data './data/pictures/mario coin_2.png;./data/pictures'
+--add-data './data/pictures/star.png;./data/pictures'
+--add-data './data/tsm.csv;./data' --add-data './data/cvx.csv;./data'
+--add-data './data/abbv.csv;./data' --add-data './data/sony.csv;./data'
+main.py

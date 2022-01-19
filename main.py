@@ -109,13 +109,29 @@ while running:
                 if params.WINDOW == 'game':
                     window.shange_stock_num(event.pos)
 
-        # контекстная подсказка
+        # контекстная подсказка - профит
         if event.type == pygame.MOUSEMOTION:
             if params.WINDOW == 'game':
                 if 650 <= event.pos[0] <= 800 and 115 <= event.pos[1] <= 130:
-                    HINT = True
+                    params.HINT_PROF = True
                 else:
-                    HINT = False
+                    params.HINT_PROF = False
+        
+        # контекстная подсказка - тикер
+        if event.type == pygame.MOUSEMOTION:
+            if params.WINDOW == 'game':
+                if 115 <= event.pos[0] <= 140 and 50 <= event.pos[1] <= 70:
+                    params.HINT_TICK = True
+                else:
+                    params.HINT_TICK = False
+
+        # контекстная подсказка - котировка
+        if event.type == pygame.MOUSEMOTION:
+            if params.WINDOW == 'game':
+                if 230 <= event.pos[0] <= 260 and 50 <= event.pos[1] <= 70:
+                    params.HINT_COT = True
+                else:
+                    params.HINT_COT = False
 
         # finish_window stars
         if event.type == pygame.MOUSEBUTTONUP:

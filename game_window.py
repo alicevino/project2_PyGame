@@ -23,7 +23,9 @@ class GameWindow:
         self.time = pygame.time.get_ticks()
         self.next()
         self.draw_timer()
-        self.show_hint()
+        self.show_hint_prof()
+        self.show_hint_tick()
+        self.show_hint_cot()
 
     # переход к сдедующему игровому такту
     def next(self):
@@ -236,9 +238,9 @@ class GameWindow:
                     params.LEVEL[cur_comp][-1] -= 1
                     params.CUR_CASH += cur_price
 
-    # печать контекстных подсказок
-    def show_hint(self):
-        if params.HINT:
+    # печать контекстных подсказок - профит
+    def show_hint_prof(self):
+        if params.HINT_PROF:
             utils.draw_button(
                 (635, 150),
                 (180, params.height * 0.14),
@@ -246,6 +248,32 @@ class GameWindow:
             utils.set_text('ПРОФИТ - прибыль,', params.COLOR, 0, 0, 25, (725, 170))
             utils.set_input_text('полученная в результате', (725, 200), 20)
             utils.set_input_text('успешных сделок', (725, 220), 20)
+
+    # печать контекстных подсказок - тикер
+    def show_hint_tick(self):
+        if params.HINT_TICK:
+            utils.draw_button(
+                (100, 80),
+                (230, params.height * 0.14),
+                2)
+            utils.set_text('ТИКЕР - буквенный код,', params.COLOR, 0, 0, 25, (215, 105))
+            utils.set_input_text('биржевого или внебиржевого', (215, 125), 20)
+            utils.set_input_text('инструмента', (215, 145), 20)
+
+    # печать контекстных подсказок - котировка
+    def show_hint_cot(self):
+        if params.HINT_COT:
+            utils.draw_button(
+                (215, 80),
+                (200, params.height * 0.25),
+                2)
+            utils.set_text('КОТИРОВКА -', params.COLOR, 0, 0, 25, (315, 105))
+            utils.set_text('конкретная цена,', params.COLOR, 0, 0, 25, (315, 125))
+            utils.set_input_text('по которой торгуется', (315, 145), 20)
+            utils.set_input_text('ценная бумага на', (315, 165), 20)
+            utils.set_input_text('конкретной бирже в', (315, 185), 20)
+            utils.set_input_text('конкретнай момент', (315, 205), 20)
+            utils.set_input_text('времени', (315, 225), 20)
 
     # печать времени, оставшегося до конца игры
     def draw_timer(self):

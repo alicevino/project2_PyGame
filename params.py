@@ -16,7 +16,9 @@ START_TIME = 0
 # SPEED = 60  # 30, ... - per minute
 
 ALERT = False
-HINT = False
+HINT_PROF = False
+HINT_TICK = False
+HINT_COT = False
 
 # Параметры игрока
 INITIAL_CASH = 1_000
