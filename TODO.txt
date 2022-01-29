@@ -19,6 +19,8 @@
 
 4.  кнопки (помимо клавиш) - спрайты
 
+5. На последней странице выводить результат робота
+
 Coдание дистрибутива
 
 pyinstaller --add-data './data/pictures/mario coin_2.png;./data/pictures'

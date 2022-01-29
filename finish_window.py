@@ -33,6 +33,7 @@ class FinishWindow:
 
         # результат игры
         self.draw_profit()
+        self.draw_robot_profit()
 
     # Оценка результата игры
     def draw_profit(self):
@@ -42,5 +43,9 @@ class FinishWindow:
         else:
             utils.set_input_text(f"ВЫ ПРОИГРАЛИ :(", (params.width * 0.5, params.height * 0.35), 90)
             utils.set_text(f'ваш убыток составил: {params.profit} y.e.', 'red', 0, 0, 55, (params.width * 0.5, params.height * 0.45))
-        utils.set_input_text(f"Попробуйте сыграть снова", (params.width * 0.5, params.height * 0.6), 40)
-        utils.set_input_text(f"и добиться лучших результатов!", (params.width * 0.5, params.height * 0.65), 40)
+        utils.set_input_text(f"Попробуйте сыграть снова", (params.width * 0.5, params.height * 0.6), 35)
+        utils.set_input_text(f"и добиться лучших результатов!", (params.width * 0.5, params.height * 0.65), 35)
+
+    def draw_robot_profit(self):
+        utils.set_input_text(f'Результат робота: {params.robot_profit} y.e.', (params.width * 0.5, params.height * 0.52), 40)
+

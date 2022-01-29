@@ -179,8 +179,8 @@ class GameWindow:
 
         # Общая прибыль робота
         font = pygame.font.Font(None, 25)
-        robot_profit = robot_cur_sum + params.ROBOT_CUR_CASH - params.INITIAL_CASH
-        text = font.render(f"ROBOT PROFIT: {robot_profit}", True, 'red')
+        params.robot_profit = robot_cur_sum + params.ROBOT_CUR_CASH - params.INITIAL_CASH
+        text = font.render(f"ROBOT PROFIT: {params.robot_profit}", True, 'red')
         params.screen.blit(text, (650, 25 + 30 * 5))
 
         # Подсказка: список акций
