@@ -38,6 +38,10 @@ class LevelWindow:
         self.draw_levels()
         self.set_rules()
         self.show_warning()
+        self.draw_robot()
+        self.change_r_params()
+        self.show_hint_stop_loss()
+        self.show_hint_take_profit()
 
     # правила игры
     def set_rules(self):
@@ -98,3 +102,49 @@ class LevelWindow:
                 pygame.draw.rect(params.screen, params.LEVEL[c][2],
                                  (params.width * 0.23 * i - params.width * 0.05 + 5, params.height * 0.75 + 5, 40 - 5 * 2, 40 - 5 * 2),
                                  0)
+
+    # отрисовка параметров робота
+    def draw_robot(self):
+        # текст
+        utils.set_input_text('параметры робота:', (params.width * 0.2, params.height * 0.86), 35)
+        utils.set_input_text('STOP LOSS:', (params.width * 0.155, params.height * 0.9275), 35)
+        utils.set_input_text(f'{params.ROBOT_STOP_LOSS}%', (params.width * 0.29, params.height * 0.9275), 35)
+        utils.set_input_text('TAKE PROFIT:', (params.width * 0.47, params.height * 0.9275), 35)
+        utils.set_input_text(f'{params.ROBOT_TAKE_PROFIT}%', (params.width * 0.61 + 5, params.height * 0.9275), 35)
+
+    # изменение параметров
+    def change_r_params(self, t=None):
+        if params.RSL:
+            pygame.draw.rect(params.screen, params.COLOR, (params.width * 0.29 - 40, params.height * 0.9275 - 20, 80, 40), 2)
+            if t:
+                if t == '+' and params.ROBOT_STOP_LOSS < 100:
+                    params.ROBOT_STOP_LOSS += 5
+                elif t == '-' and params.ROBOT_STOP_LOSS > 0:
+                    params.ROBOT_STOP_LOSS -= 5
+        if params.RTP:
+            pygame.draw.rect(params.screen, params.COLOR, (params.width * 0.61 - 35, params.height * 0.9275 - 20, 80, 40), 2)
+            if t:
+                if t == '+' and params.ROBOT_TAKE_PROFIT < 100:
+                    params.ROBOT_TAKE_PROFIT += 5
+                elif t == '-' and params.ROBOT_TAKE_PROFIT > 0:
+                    params.ROBOT_TAKE_PROFIT -= 5
+
+    # подсказка R_STOP_LOSS
+    def show_hint_stop_loss(self):
+        if params.HINT_STOP_LOSS:
+            utils.draw_button((params.width * 0.074, params.height * 0.745),
+                              (params.width * 0.075 * 3, params.height * 0.04 * 3.5), 2)
+            utils.set_input_text('указание зафиксировать', (params.width * 0.185, params.height * 0.77), 20)
+            utils.set_input_text('сделку, когда цена', (params.width * 0.185, params.height * 0.8), 20)
+            utils.set_input_text('достигнет определенного', (params.width * 0.185, params.height * 0.83), 20)
+            utils.set_input_text('уровня роста или падения', (params.width * 0.185, params.height * 0.86), 20)
+
+    # подсказка R_TAKE_PROFIT
+    def show_hint_take_profit(self):
+        if params.HINT_TAKE_PROFIT:
+            utils.draw_button((params.width * 0.365, params.height * 0.745),
+                              (params.width * 0.075 * 3, params.height * 0.04 * 3.5), 2)
+            utils.set_input_text('указание зафиксировать', (params.width * 0.475, params.height * 0.77), 20)
+            utils.set_input_text('прибыль, когда цена', (params.width * 0.475, params.height * 0.8), 20)
+            utils.set_input_text('достигнет определенного', (params.width * 0.475, params.height * 0.83), 20)
+            utils.set_input_text('уровня роста или падения', (params.width * 0.475, params.height * 0.86), 20)

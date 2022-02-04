@@ -9,7 +9,7 @@ import params
 
 # Инициализация библиотеки
 pygame.init()
-size = params.width, params.height = 900, 650
+size = params.width, params.height = 900, 600
 params.screen = pygame.display.set_mode(size)
 pygame.display.set_caption('Игра БИРЖА')
 
@@ -48,6 +48,49 @@ while running:
                     and params.height * 0.75 <= event.pos[1] < params.height * 0.75 + 40):
                 if params.WINDOW == 'level':
                     window.choose_level(event.pos)
+
+        # change_r_params()
+        if event.type == pygame.MOUSEBUTTONUP and event.button == pygame.BUTTON_LEFT:
+            if params.WINDOW == 'level':
+                if (params.width * 0.29 - 40 <= event.pos[0] <= params.width * 0.29 + 40
+                        and params.height * 0.9275 - 20 <= event.pos[1] < params.height * 0.9275 + 20):
+                    params.RSL = True
+                    params.RTP = False
+                if (params.width * 0.61 - 35 <= event.pos[0] <= params.width * 0.61 + 45
+                        and params.height * 0.9275 - 20 <= event.pos[1] < params.height * 0.9275 + 20):
+                    params.RTP = True
+                    params.RSL = False
+                if not (params.width * 0.29 - 40 <= event.pos[0] <= params.width * 0.29 + 40
+                        and params.height * 0.9275 - 20 <= event.pos[1] < params.height * 0.9275 + 20)\
+                        and not (params.width * 0.61 - 35 <= event.pos[0] <= params.width * 0.61 + 45
+                        and params.height * 0.9275 - 20 <= event.pos[1] < params.height * 0.9275 + 20):
+                    params.RSL = params.RTP = False
+        if params.WINDOW == 'level' and (params.RSL or params.RTP):
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_UP:
+                    window.change_r_params('+')
+                if event.key == pygame.K_DOWN:
+                    window.change_r_params('-')
+
+        # show_hint_stop_loss()
+        if event.type == pygame.MOUSEMOTION:
+            if params.WINDOW == 'level':
+                if params.width * 0.074 <= event.pos[0] <= params.width * 0.074 + params.width * 0.075 * 3 \
+                        and params.height * 0.745 - 5 + params.height * 0.04 * 3.5 <= event.pos[1] \
+                        <= params.height * 0.745 + params.height * 0.04 * 3.5 + 30:
+                    params.HINT_STOP_LOSS = True
+                else:
+                    params.HINT_STOP_LOSS = False
+
+        # show_hint_take_profit()
+        if event.type == pygame.MOUSEMOTION:
+            if params.WINDOW == 'level':
+                if params.width * 0.365 <= event.pos[0] <= params.width * 0.365 + params.width * 0.075 * 3 \
+                        and params.height * 0.745 - 5 + params.height * 0.04 * 3.5 <= event.pos[1] \
+                        <= params.height * 0.745 + params.height * 0.04 * 3.5 + 30:
+                    params.HINT_TAKE_PROFIT = True
+                else:
+                    params.HINT_TAKE_PROFIT = False
 
         # переход from start to level
         if event.type == pygame.MOUSEBUTTONUP and event.button == pygame.BUTTON_LEFT:

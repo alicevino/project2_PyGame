@@ -19,6 +19,8 @@ ALERT = False
 HINT_PROF = False
 HINT_TICK = False
 HINT_COT = False
+HINT_STOP_LOSS = False
+HINT_TAKE_PROFIT = False
 
 # Параметры игрока
 INITIAL_CASH = 1_000
@@ -40,9 +42,10 @@ ROBOT = {
     'SONY': [True, 0, 0, 0],
 }
 ROBOT_CUR_CASH = INITIAL_CASH
-ROBOT_USE_STOP = True
-ROBOT_STOP_LOSS = 0.1
-ROBOT_TAKE_PROFIT = 0.1
+ROBOT_STOP_LOSS = 10
+RSL = False
+ROBOT_TAKE_PROFIT = 10
+RTP = False
 robot_profit = 0
 
 CUR_PRICE = 0

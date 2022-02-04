@@ -130,9 +130,9 @@ class GameWindow:
                     # Ход робота: простая игра на повышение
                     if not params.ROBOT[c][2] or params.ROBOT[c][2] > cur_price:
                         # если цена падает ниже ROBOT_STOP_LOSS, продаем все
-                        if params.ROBOT_USE_STOP and \
+                        if params.ROBOT_STOP_LOSS and \
                                 params.ROBOT[c][3] - cur_price > \
-                                params.ROBOT[c][3] * params.ROBOT_STOP_LOSS:
+                                params.ROBOT[c][3] * params.ROBOT_STOP_LOSS / 100:
                             params.ROBOT_CUR_CASH += params.ROBOT[c][1] * cur_price
                             params.ROBOT[c][1] = 0
                             params.ROBOT[c][3] = 0
@@ -149,9 +149,9 @@ class GameWindow:
 
                     elif params.ROBOT[c][2] < cur_price:
                         # если цена растет выше ROBOT_TAKE_PROFIT, продаем все
-                        if params.ROBOT_USE_STOP and \
+                        if params.ROBOT_TAKE_PROFIT and \
                                 cur_price - params.ROBOT[c][3] > \
-                                params.ROBOT[c][3] * params.ROBOT_TAKE_PROFIT:
+                                params.ROBOT[c][3] * params.ROBOT_TAKE_PROFIT / 100:
                             params.ROBOT_CUR_CASH += params.ROBOT[c][1] * cur_price
                             params.ROBOT[c][1] = 0
                             params.ROBOT[c][3] = 0
@@ -256,9 +256,9 @@ class GameWindow:
                 (100, 80),
                 (230, params.height * 0.14),
                 2)
-            utils.set_text('ТИКЕР - буквенный код,', params.COLOR, 0, 0, 25, (215, 105))
-            utils.set_input_text('биржевого или внебиржевого', (215, 125), 20)
-            utils.set_input_text('инструмента', (215, 145), 20)
+            utils.set_text('ТИКЕР - буквенный код', params.COLOR, 0, 0, 25, (215, 105))
+            utils.set_input_text('биржевого инструмента', (215, 125), 20)
+            utils.set_input_text('(акции)', (215, 145), 20)
 
     # печать контекстных подсказок - котировка
     def show_hint_cot(self):
@@ -270,10 +270,9 @@ class GameWindow:
             utils.set_text('КОТИРОВКА -', params.COLOR, 0, 0, 25, (315, 105))
             utils.set_text('конкретная цена,', params.COLOR, 0, 0, 25, (315, 125))
             utils.set_input_text('по которой торгуется', (315, 145), 20)
-            utils.set_input_text('ценная бумага на', (315, 165), 20)
-            utils.set_input_text('конкретной бирже в', (315, 185), 20)
-            utils.set_input_text('конкретнай момент', (315, 205), 20)
-            utils.set_input_text('времени', (315, 225), 20)
+            utils.set_input_text('акция на конкретной', (315, 165), 20)
+            utils.set_input_text('бирже в конкретный', (315, 185), 20)
+            utils.set_input_text('момент времени', (315, 205), 20)
 
     # печать времени, оставшегося до конца игры
     def draw_timer(self):
