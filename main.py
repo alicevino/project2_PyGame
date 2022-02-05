@@ -10,7 +10,7 @@ import params
 # Инициализация библиотеки
 pygame.init()
 size = params.width, params.height = 900, 600
-params.screen = pygame.display.set_mode(size)
+params.screen = pygame.display.set_mode(size, pygame.NOFRAME)
 pygame.display.set_caption('Игра БИРЖА')
 
 import utils
