@@ -34,6 +34,9 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+        if event.type == pygame.KEYUP:
+            if event.key == pygame.K_ESCAPE:
+                running = False
 
         # изменение цветовой темы
         if event.type == pygame.MOUSEBUTTONUP and event.button == pygame.BUTTON_LEFT:
