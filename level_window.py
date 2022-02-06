@@ -70,6 +70,7 @@ class LevelWindow:
                 break
         else:
             params.ALERT = True
+            params.PL = ['CVX', 'TSM', 'ABBV', 'SONY']
 
     # предупреждение, что ни одна компания не выбрана
     def show_warning(self):
